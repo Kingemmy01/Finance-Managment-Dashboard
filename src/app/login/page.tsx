@@ -17,25 +17,23 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
 
-     try {
-    await account.createSession({
-      userId: email, 
-      password: password
-    });
+    try {
+      // ✅ Correct method for email/password login
+      await (account as any).createEmailSession(email, password);
 
-    toast({ title: "Logged in successfully!" });
-    router.push("/dashboard");
-  } catch (err: any) {
-    toast({
-      title: "Login failed",
-      description: err.message || String(err),
-      variant: "destructive",
-    });
-    console.error(err);
-  } finally {
-    setLoading(false);
-  }
-};
+      toast({ title: "Logged in successfully!" });
+      router.push("/dashboard");
+    } catch (err: any) {
+      toast({
+        title: "Login failed",
+        description: err.message || String(err),
+        variant: "destructive",
+      });
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex min-h-screen">
