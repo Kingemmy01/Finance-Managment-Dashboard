@@ -17,11 +17,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
 
-   const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true);
-
-  try {
+     try {
     await account.createSession({
       userId: email, 
       password: password
