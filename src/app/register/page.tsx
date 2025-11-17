@@ -20,7 +20,9 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      await account.create(ID.unique(), email, password, name);
+      await account.create({
+        userId: ID.unique(),
+        email, password, name});
 
       toast({ title: "Account created successfully!" });
       router.push("/login");
