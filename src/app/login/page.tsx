@@ -18,7 +18,8 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await account.createEmailPasswordSession(email, password);
+      await account.createsession({
+        email, password});
 
       toast({ title: "Logged in successfully!" });
       router.push("/dashboard");
