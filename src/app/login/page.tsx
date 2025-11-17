@@ -17,23 +17,29 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      await account.createSession({
-        email, password});
+   const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
 
-      toast({ title: "Logged in successfully!" });
-      router.push("/dashboard");
-    } catch (err: any) {
-      toast({
-        title: "Login failed",
-        description: err?.message || String(err),
-        variant: "destructive",
-      });
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    await account.createSession({
+      userId: email, 
+      password: password
+    });
+
+    toast({ title: "Logged in successfully!" });
+    router.push("/dashboard");
+  } catch (err: any) {
+    toast({
+      title: "Login failed",
+      description: err.message || String(err),
+      variant: "destructive",
+    });
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="flex min-h-screen">
