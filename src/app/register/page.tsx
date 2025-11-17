@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { account } from "@/lib/appwrite";
-import { ID } from "appwrite";
+import { ID } from "appwrite"; // ID.unique() for new user
 import { useToast } from "@/components/ui/use-toast";
 
 export default function RegisterPage() {
@@ -20,16 +20,15 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      await account.create({
-        userId: ID.unique(),
-        email, password, name});
+      //  Create a new user account
+      await account.create(ID.unique(), email, password, name);
 
       toast({ title: "Account created successfully!" });
       router.push("/login");
     } catch (err: any) {
       toast({
         title: "Registration failed",
-        description: err?.message || String(err),
+        description: err.message || String(err),
         variant: "destructive",
       });
       console.error(err);
@@ -88,11 +87,11 @@ export default function RegisterPage() {
             {loading ? "Creating..." : "Register"}
           </button>
           <div className="text-center mt-4 text-sm">
-  Already have an account?{" "}
-  <a href="/login" className="text-[#c7ef74] hover:underline">
-    Login
-  </a>
-</div>
+            Already have an account?{" "}
+            <a href="/login" className="text-[#c7ef74] hover:underline">
+            Login
+            </a>
+        </div>
         </form>
       </div>
     </div>
