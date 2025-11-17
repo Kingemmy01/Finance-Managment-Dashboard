@@ -18,7 +18,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      // ✅ Correct method for email/password login
+      //  email/password login
       await (account as any).createEmailSession(email, password);
 
       toast({ title: "Logged in successfully!" });
