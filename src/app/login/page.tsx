@@ -18,7 +18,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await account.createsession({
+      await account.createSession({
         email, password});
 
       toast({ title: "Logged in successfully!" });
